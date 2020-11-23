@@ -44,7 +44,7 @@ public class InternetProviderClient {
     }
 
     private static void getXmlFileOfAccounts() {
-        System.setProperty("java.security.policy", "src\\Client\\client.policy");
+        System.setProperty("java.security.policy", "InternetProviderClient\\src\\Client\\client.policy");
         if (System.getSecurityManager() == null) {
             System.setSecurityManager(new SecurityManager());
         }
@@ -55,7 +55,7 @@ public class InternetProviderClient {
             InternetProvider internetProvider = (InternetProvider) registry.lookup("actions");
 
             // Открытие потока на вывод и заполнение XML файла на стороне клиента пришедшими с сервера данными
-            try(BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream("src\\Client\\accounts.xml"))) {
+            try(BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream("InternetProviderClient\\src\\Client\\accounts.xml"))) {
                 bufferedOutputStream.write(internetProvider.getXmlFileOfAccounts());
             }
         }
