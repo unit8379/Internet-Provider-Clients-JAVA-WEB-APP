@@ -5,7 +5,7 @@ import java.rmi.server.*;
 
 public class InternetProviderServer {
     public static void main(String[] args) {
-        System.setProperty("java.security.policy", "src\\Server\\client.policy");
+        System.setProperty("java.security.policy", "InternetProviderServer\\src\\Server\\client.policy");
         if (System.getSecurityManager() == null) {
             System.setSecurityManager(new SecurityManager());
         }

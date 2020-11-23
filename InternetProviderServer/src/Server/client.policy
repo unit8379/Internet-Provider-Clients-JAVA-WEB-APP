@@ -1,0 +1,13 @@
+grant
+{
+    permission java.net.SocketPermission
+    "*:1024-65535", "connect,accept,resolve";
+    permission java.net.SocketPermission
+    "*:80", "connect";
+    permission java.util.PropertyPermission
+    "javax.xml.accessExternalDTD", "write";
+    permission java.lang.RuntimePermission
+    "accessDeclaredMembers";
+    permission java.io.FilePermission
+    "InternetProviderServer${/}src${/}Server${/}*", "read,write";
+};

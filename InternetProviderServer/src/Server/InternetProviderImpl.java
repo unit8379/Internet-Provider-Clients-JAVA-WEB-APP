@@ -5,7 +5,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.*;
-import Server.AccountsHierarchy.*;
+
+import Server.AccountsHierarchy.Accounts;
 
 public class InternetProviderImpl implements InternetProvider {
     private String fromName;
@@ -24,10 +25,10 @@ public class InternetProviderImpl implements InternetProvider {
 
         // В БУДУЩЕМ ЗДЕСЬ ДОЛЖНО БЫТЬ ЗАПОЛНЕНИЕ КЛАССОВ AccountsHierarchy ИЗ БАЗЫ ДАННЫХ
         //System.out.println("Введите имя входного XML файла:");
-        String inputFileName = makeCorrectXmlName("src\\Server\\accounts-new.xml");
+        String inputFileName = makeCorrectXmlName("InternetProviderServer\\src\\Server\\accounts-new.xml");
 
         //System.out.println("Введите имя выходного XML файла:");
-        String outputFileName = makeCorrectXmlName("src\\Server\\xml-to-transfer.xml");
+        String outputFileName = makeCorrectXmlName("InternetProviderServer\\src\\Server\\xml-to-transfer.xml");
 
         try {
             // связывание класса с xml и чтение из него.

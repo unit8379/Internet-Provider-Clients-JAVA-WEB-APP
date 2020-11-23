@@ -1,5 +1,7 @@
 package Client;
 
+import Server.InternetProvider;
+
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.rmi.registry.LocateRegistry;
@@ -50,8 +52,7 @@ public class InternetProviderClient {
 
         try {
             Registry registry = LocateRegistry.getRegistry(url);
-            // пока что возвращается экземпляр product с интерфейсным типом Server.Product, потому что Client.Product не каститься и я не знаю что это
-            Server.InternetProvider internetProvider = (Server.InternetProvider) registry.lookup("actions");
+            InternetProvider internetProvider = (InternetProvider) registry.lookup("actions");
 
             // Открытие потока на вывод и заполнение XML файла на стороне клиента пришедшими с сервера данными
             try(BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream("src\\Client\\accounts.xml"))) {
