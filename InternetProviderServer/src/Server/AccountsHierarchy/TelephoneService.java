@@ -9,6 +9,14 @@ public class TelephoneService {
     private String name;
     private String type;
 
+    public TelephoneService() {}
+
+    public TelephoneService(String id, String name, String type) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+    }
+
     public String getId() {
         return id;
     }

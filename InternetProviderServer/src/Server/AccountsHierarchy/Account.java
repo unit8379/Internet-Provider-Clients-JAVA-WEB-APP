@@ -11,6 +11,15 @@ public class Account {
     private String lastName;
     private Tariff tariff;
 
+    public Account() {}
+
+    public Account(String accountNumber, String firstName, String lastName, Tariff tariff) {
+        this.accountNumber = accountNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.tariff = tariff;
+    }
+
     @XmlAttribute(name = "accountNumber")
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;

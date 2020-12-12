@@ -9,6 +9,14 @@ public class InternetService {
     private String name;
     private String speed;
 
+    public InternetService() {}
+
+    public InternetService(String id, String name, String speed) {
+        this.id = id;
+        this.name = name;
+        this.speed = speed;
+    }
+
     public String getId() {
         return id;
     }

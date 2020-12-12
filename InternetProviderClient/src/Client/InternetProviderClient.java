@@ -9,14 +9,21 @@ import java.rmi.registry.Registry;
 import java.util.Scanner;
 
 public class InternetProviderClient {
+    private static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
+        System.setProperty("java.security.policy", "InternetProviderClient\\src\\Client\\client.policy");
+        if (System.getSecurityManager() == null) {
+            System.setSecurityManager(new SecurityManager());
+        }
+
         AppManager();
     }
 
     private static void AppManager() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Система для работы с базой данных клиентов интернет-провайдера.\n\nВведите номер требуемого действия над базой данных." +
-                "\n1. Создать в папке клиентской программы XML файл с информацией обо всех клиентах интернет-провайдера");
+                "\n1. Добавить информацию о клиенте в базу данных." + "\n2. Удалить клиента из базы данных" +
+                "\n3. Создать в папке клиентской программы XML файл с информацией обо всех клиентах интернет-провайдера");
 
         String userInput = scanner.next();
         while (!tryParseInt(userInput)) {
@@ -26,6 +33,14 @@ public class InternetProviderClient {
 
         switch (Integer.parseInt(userInput)) {
             case 1:
+                insertNewAccountToDatabase();
+                break;
+
+            case 2:
+                deleteAccountFromDatabase();
+                break;
+
+            case 3:
                 getXmlFileOfAccounts();
                 break;
 
@@ -43,11 +58,43 @@ public class InternetProviderClient {
         }
     }
 
-    private static void getXmlFileOfAccounts() {
-        System.setProperty("java.security.policy", "InternetProviderClient\\src\\Client\\client.policy");
-        if (System.getSecurityManager() == null) {
-            System.setSecurityManager(new SecurityManager());
+    private static void insertNewAccountToDatabase() {
+        System.out.println("Введите имя клиента:");
+        String firstName = scanner.next();
+        System.out.println("Введите фамилию клиента:");
+        String secondName = scanner.next();
+        System.out.println("Введите номер подключенного для клиента тарифа (1-9):");
+        int tariffId = scanner.nextInt();
+
+        String url = "127.0.0.1"; // localhost
+        try {
+            Registry registry = LocateRegistry.getRegistry(url);
+            InternetProvider internetProvider = (InternetProvider) registry.lookup("actions");
+            internetProvider.insertNewAccountToDatabase(firstName, secondName, tariffId);
         }
+        catch (Exception e) {
+            System.out.println("Client exception: ");
+            e.printStackTrace();
+        }
+    }
+
+    private static void deleteAccountFromDatabase() {
+        System.out.println("Введите id клиента, которого нужно удалить из базы данных:");
+        int accountId = scanner.nextInt();
+
+        String url = "127.0.0.1"; // localhost
+        try {
+            Registry registry = LocateRegistry.getRegistry(url);
+            InternetProvider internetProvider = (InternetProvider) registry.lookup("actions");
+            internetProvider.deleteAccountFromDatabase(accountId);
+        }
+        catch (Exception e) {
+            System.out.println("Client exception: ");
+            e.printStackTrace();
+        }
+    }
+
+    private static void getXmlFileOfAccounts() {
         String url = "127.0.0.1"; // localhost
 
         try {

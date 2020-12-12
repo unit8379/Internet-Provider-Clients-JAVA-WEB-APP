@@ -12,6 +12,17 @@ public class Tariff {
     private TelephoneService telephoneService;
     private TvService tvService;
 
+    public Tariff() {}
+
+    public Tariff(String name, String cost, String id, InternetService internetService, TelephoneService telephoneService, TvService tvService) {
+        this.name = name;
+        this.cost = cost;
+        this.id = id;
+        this.internetService = internetService;
+        this.telephoneService = telephoneService;
+        this.tvService = tvService;
+    }
+
     @XmlAttribute(name = "name")
     public void setName(String name) {
         this.name = name;
